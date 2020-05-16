@@ -1,42 +1,7 @@
 <template>
   <v-app>
-    <v-navigation-drawer
-      app
-      clipped
-      color="grey lighten-4"
-    >
-      <v-list
-        dense
-        class="grey lighten-4"
-      >
-        <template v-for="(item, i) in items">
-          <v-list-item
-            :key="i"
-            link>
-            <v-list-item-action>
-              <v-icon>{{ item.icon }}</v-icon>
-            </v-list-item-action>
-            <v-list-item-content>
-              <v-list-item-title class="grey--text">
-                {{ item.text }}
-              </v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
-        </template>
-      </v-list>
-    </v-navigation-drawer>
-
     <v-content>
-      <v-container
-        fluid
-        class="grey lighten-4 fill-height"
-      >
-        <v-row
-          justify="center"
-          align="center"
-        >
-        </v-row>
-      </v-container>
+      <router-view />
     </v-content>
   </v-app>
 </template>
