@@ -1,60 +1,64 @@
 <template>
   <v-app>
-    <v-app-bar
+    <v-navigation-drawer
       app
-      color="primary"
-      dark
+      clipped
+      color="grey lighten-4"
     >
-      <div class="d-flex align-center">
-        <v-img
-          alt="Vuetify Logo"
-          class="shrink mr-2"
-          contain
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
-          transition="scale-transition"
-          width="40"
-        />
-
-        <v-img
-          alt="Vuetify Name"
-          class="shrink mt-1 hidden-sm-and-down"
-          contain
-          min-width="100"
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
-          width="100"
-        />
-      </div>
-
-      <v-spacer></v-spacer>
-
-      <v-btn
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-        text
+      <v-list
+        dense
+        class="grey lighten-4"
       >
-        <span class="mr-2">Latest Release</span>
-        <v-icon>mdi-open-in-new</v-icon>
-      </v-btn>
-    </v-app-bar>
+        <template v-for="(item, i) in items">
+          <v-list-item
+            :key="i"
+            link>
+            <v-list-item-action>
+              <v-icon>{{ item.icon }}</v-icon>
+            </v-list-item-action>
+            <v-list-item-content>
+              <v-list-item-title class="grey--text">
+                {{ item.text }}
+              </v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </template>
+      </v-list>
+    </v-navigation-drawer>
 
     <v-content>
-      <HelloWorld/>
+      <v-container
+        fluid
+        class="grey lighten-4 fill-height"
+      >
+        <v-row
+          justify="center"
+          align="center"
+        >
+        </v-row>
+      </v-container>
     </v-content>
   </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld';
-
-export default {
-  name: 'App',
-
-  components: {
-    HelloWorld,
-  },
-
-  data: () => ({
-    //
-  }),
-};
+  export default {
+    props: {
+      source: String,
+    },
+    data: () => ({
+      items: [
+        { icon: 'phone_android', text: 'Home'},
+        { icon: 'playlist_add_check', text: 'Data' },
+        { icon: 'photo_library', text: 'Gallery' },
+        { divider: true },
+      ],
+    }),
+  }
 </script>
+
+<style>
+#keep .v-navigation-drawer__border {
+  display: none
+}
+</style>
