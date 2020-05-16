@@ -12,12 +12,6 @@
       source: String,
     },
     data: () => ({
-      items: [
-        { icon: 'phone_android', text: 'Home'},
-        { icon: 'playlist_add_check', text: 'Data' },
-        { icon: 'photo_library', text: 'Gallery' },
-        { divider: true },
-      ],
     }),
   }
 </script>
