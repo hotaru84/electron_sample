@@ -6,22 +6,22 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     ipaddr:null,
-    file:null
+    files:null
   },
   getters: {
     ipaddr(state) {
       return state.ipaddr
     },
-    file(state) {
-      return state.file
+    files(state) {
+      return state.files
     }
   },
   mutations: {
     setIpAddress(state,payload) {
       this.state.ipaddr = payload.ip
     },
-    setFile(state,payload){
-      this.state.file = payload.file
+    setFiles(state,payload){
+      this.state.files = payload.files
     }
   },
   actions: {

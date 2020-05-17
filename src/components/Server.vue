@@ -37,12 +37,18 @@ export default {
     },
     webserver() {
       return http.createServer((req,res)=>{
-        const file = this.$store.getters.file
-        const rs = fs.createReadStream(file.path,'utf8')
-        let reqfilename = req.url.replace('/','')
-        window.console.log("req:" + reqfilename + ", res:" + file.name)
-        res.writeHead(200,{'Content-Type':file.type});
-        rs.pipe(res)
+        const files = this.$store.getters.files
+          .filter(f=>f.name == req.url.replace('/',''))
+        if(files.length > 0){
+          window.console.log("found:" + files[0])
+          const rs = fs.createReadStream(files[0].path,'utf8')
+          res.writeHead(200,{'Content-Type':files[0].type});
+          rs.pipe(res)
+        } else {
+          window.console.log("not found:" + req.path)
+          res.writeHead(404, {'Content-Type': 'text/plain'});
+          res.end('my notfound! : ' + req.path);
+        }
       })
     }
   },

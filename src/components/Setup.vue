@@ -2,8 +2,9 @@
   <v-container>
     <v-row>
       <v-col>
-        <v-file-input @change="getFileContent" label="File input"></v-file-input>
-        <v-select :items="iplist" @input="setip"/>
+        <!--webkitdirectory -->
+        <v-file-input :value="files" multiple @change="setFiles" label="File input" ></v-file-input>
+        <v-select :value="ip" :items="iplist" @input="setIPAddress"/>
       </v-col>
     </v-row>
     <v-row>
@@ -20,10 +21,9 @@
 <script>
 import { isNullOrUndefined } from 'util'
 const os = require('os')
-//const fs = require('fs')
 export default {
   data: () => ({
-    iplist:[]
+    
   }),
   methods:{
     done(){
@@ -32,35 +32,30 @@ export default {
     cancel(){
       this.$emit('cancel')
     },
-    updateNic(){
-      let ifaces = os.networkInterfaces();
-      this.iplist = Object.values(ifaces).reduce((res,list)=>{
+    setFiles(files){
+      window.console.log(files)
+      this.$store.commit("setFiles",{files}) 
+    },
+    setIPAddress(ip){
+      this.$store.commit("setIpAddress",{ip})
+    }
+  },
+  computed:{
+    isNotValid(){
+      return isNullOrUndefined(this.files) ||
+          isNullOrUndefined(this.ip)
+    },
+    files() {return this.$store.getters.files},
+    ip() {return this.$store.getters.ipaddr},
+    iplist(){
+      return Object.values(os.networkInterfaces()).reduce((res,list)=>{
         return list.reduce((l,iface)=>{
           if(iface.family != 'IPv4' || iface.internal != false) return l;
           l.push(iface.address);
           return l;
         },res)
       },[])
-    },
-    getFileContent(file){
-      //const src = fs.createReadStream(file.path,'utf8')
-      this.$store.commit("setFile",{file})
-      window.console.log(this.$store.getters.file)
-    },
-    setip(ip){
-      this.$store.commit("setIpAddress",{ip})
-      window.console.log(this.$store.getters.ipaddr)
     }
   },
-  computed:{
-    isNotValid(){
-      return isNullOrUndefined(this.$store.getters.file) ||
-          isNullOrUndefined(this.$store.getters.ipaddr)
-    },
-  },
-  mounted(){
-    this.updateNic()
-
-  }
 }
 </script>
