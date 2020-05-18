@@ -10,9 +10,6 @@
       <v-col>
         <v-btn @click="cancel">CANCEL</v-btn>
       </v-col>
-      <v-col>
-        <v-btn color="primary" @click="start">START</v-btn>
-      </v-col>
     </v-row>
   </v-container>
 </template>
@@ -23,18 +20,14 @@ const qrcode = require('qrcode')
 const http = require('http')
 const fs = require('fs')
 export default {
+  props:["enable"],
   data: () => ({
     qrurl:"",
     server:null
   }),
   methods:{
-    done(){
-      this.server.close()
-      this.$emit('done')
-    },
     cancel(){
-      this.server.close()
-      this.server = null
+      this.stop()
       this.$emit('cancel')
     },
     webserver() {
@@ -65,20 +58,27 @@ export default {
             this.qrurl = url
           })
         }
-        this.server = this.webserver()
-        this.server.listen(3000,this.$store.getters.ipaddr)
-      } else {
-        this.server.close()
-        this.server = null
+        this.server = this.webserver().listen(3000,this.$store.getters.ipaddr)
       }
     },
+    stop(){
+      if(isNullOrUndefined(this.server)) return;
+      this.server.close()
+      this.server = null
+    }
   },
   computed:{
     files() {return this.$store.getters.files},
     ip() {return this.$store.getters.ipaddr},
   }, 
+  watch:{
+    enable(v){
+      if(v)this.start()
+      else this.stop()
+    }
+  },
   beforeDestroy() {
-    this.server.close()
+    this.stop()
   }
 }
 </script>

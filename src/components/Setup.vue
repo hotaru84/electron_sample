@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container fluid>
     <v-row>
       <v-col>
         <!--webkitdirectory -->
@@ -9,10 +9,7 @@
     </v-row>
     <v-row>
       <v-col>
-        <v-btn @click="cancel">CANCEL</v-btn>
-      </v-col>
-      <v-col>
-        <v-btn color="primary" @click="done" :disabled="isNotValid">DONE</v-btn>
+        <v-btn color="primary" @click="done" :disabled="isNotValid">START</v-btn>
       </v-col>
     </v-row>
   </v-container>
@@ -28,9 +25,6 @@ export default {
   methods:{
     done(){
       this.$emit('done')
-    },
-    cancel(){
-      this.$emit('cancel')
     },
     setFiles(files){
       window.console.log(files)

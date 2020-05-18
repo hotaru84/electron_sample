@@ -10,13 +10,12 @@ const isDevelopment = process.env.NODE_ENV !== 'production'
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let win
-
 // Scheme must be registered before the app is ready
 protocol.registerSchemesAsPrivileged([{scheme: 'app', privileges: { secure: true, standard: true } }])
 
 function createWindow () {
   // Create the browser window.
-  win = new BrowserWindow({ width: 800, height: 600, webPreferences: {
+  win = new BrowserWindow({ width: 800, height: 600, show:false, webPreferences: {
     nodeIntegration: true,
     webSecurity:false
   } })
@@ -72,6 +71,27 @@ app.on('ready', async () => {
 
   }
   createWindow()
+  let splashScreen = new BrowserWindow({
+    minWidth: 400,
+    minHeight: 280,
+    width: 500,
+    height: 280,
+    center:true,
+    backgroundColor: '#e0eff8',
+    webPreferences: {
+      nodeIntegration: true,
+      webSecurity: false
+                            },
+    frame: false,
+    skipTaskbar: true,
+    resizable: false,
+    alwaysOnTop: true,
+  });
+  splashScreen.loadURL(__dirname + '/../splash.html');
+  win.once('ready-to-show',()=>{
+    splashScreen.destroy()
+    win.show()
+  })
 })
 
 // Exit cleanly on request from parent process in development mode.
