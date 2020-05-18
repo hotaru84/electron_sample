@@ -1,31 +1,20 @@
 <template>
-  <v-container fluid>
-    <v-row>
-      <v-col>
-        <!--webkitdirectory -->
-        <v-file-input :value="files" multiple @change="setFiles" label="File input" ></v-file-input>
-        <v-select :value="ip" :items="iplist" @input="setIPAddress"/>
-      </v-col>
-    </v-row>
-    <v-row>
-      <v-col>
-        <v-btn color="primary" @click="done" :disabled="isNotValid">START</v-btn>
-      </v-col>
-    </v-row>
-  </v-container>
+  <v-form>
+    <!--webkitdirectory -->
+    <v-file-input :value="files" @change="setFiles"
+      multiple show-size prepend-icon="attach_file"
+      clearable clear-icon="clear" label="File input" />
+    <v-select :value="ip" :items="iplist" @input="setIPAddress"/>
+  </v-form>
 </template>
 
 <script>
-import { isNullOrUndefined } from 'util'
 const os = require('os')
 export default {
   data: () => ({
     
   }),
   methods:{
-    done(){
-      this.$emit('done')
-    },
     setFiles(files){
       window.console.log(files)
       this.$store.commit("setFiles",{files}) 
@@ -35,10 +24,6 @@ export default {
     }
   },
   computed:{
-    isNotValid(){
-      return isNullOrUndefined(this.files) ||
-          isNullOrUndefined(this.ip)
-    },
     files() {return this.$store.getters.files},
     ip() {return this.$store.getters.ipaddr},
     iplist(){

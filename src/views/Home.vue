@@ -1,25 +1,60 @@
 <template>
-  <v-stepper v-model="e1">
-    <v-stepper-items>
-      <v-stepper-content step="1">
-        <setup @done="e1 = 2"/>
-      </v-stepper-content>
-      <v-stepper-content step="2">
-        <server :enable="e1==2" @cancel="e1 = 1"/>
-      </v-stepper-content>
-    </v-stepper-items>
-  </v-stepper>
+  <v-container
+    class="fill-height"
+    fluid
+  >
+    <v-row
+      align="center"
+      justify="center"
+    >
+      <v-col
+        cols="12"
+        sm="8"
+        md="4"
+      >
+        <v-card class="elevation-12">
+          <v-toolbar
+            color="primary"
+            dark
+            flat
+          >
+            <v-toolbar-title>Setup</v-toolbar-title>
+          </v-toolbar>
+          <v-card-text>
+            <v-form>
+            <setup />
+            <server :enable="serverStart" v-show="serverStart"/>
+            </v-form>
+          </v-card-text>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn color="primary" @click="serverStart = !serverStart" :disabled="isSettingNotValid">
+              {{serverStart?"STOP":"START"}}
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script>
+import { isNullOrUndefined } from 'util'
 import Setup from '../components/Setup'
 import Server from '../components/Server'
-  export default {
-    components:{Setup, Server},
-    data () {
-      return {
-        e1: 1,
-      }
+export default {
+  components:{Setup, Server},
+  data () {
+    return {
+      serverStart:false,
+    }
+  },
+  computed:{
+    isSettingNotValid(){
+      return isNullOrUndefined(this.files) || isNullOrUndefined(this.ip) || this.files.length == 0
     },
+    files() {return this.$store.getters.files},
+    ip() {return this.$store.getters.ipaddr},
   }
+}
 </script>

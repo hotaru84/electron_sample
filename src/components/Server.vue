@@ -1,17 +1,5 @@
 <template>
-  <v-container>
-    <v-row>
-      <v-col cols="6">
-        <v-img :src="qrurl" />
-      </v-col>
-    </v-row>
-
-    <v-row>
-      <v-col>
-        <v-btn @click="cancel">CANCEL</v-btn>
-      </v-col>
-    </v-row>
-  </v-container>
+  <v-img :src="qrurl" />
 </template>
 
 <script>
