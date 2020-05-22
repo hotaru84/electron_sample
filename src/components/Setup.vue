@@ -1,10 +1,17 @@
 <template>
   <v-form>
-    <!--webkitdirectory -->
-    <v-file-input :value="files" @change="setFiles"
-      multiple show-size prepend-icon="attach_file"
-      clearable clear-icon="clear" label="File input" />
-    <v-select :value="ip" :items="iplist" @input="setIPAddress"/>
+    <v-file-input
+     :value="files"
+      @change="setFiles"
+      multiple
+      show-size
+      prepend-icon="attach_file"
+      clearable clear-icon="clear"
+      label="File input" />
+    <v-select
+     :value="ip"
+     :items="iplist"
+     @input="setIPAddress"/>
   </v-form>
 </template>
 

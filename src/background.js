@@ -19,12 +19,13 @@ function createWindow () {
     nodeIntegration: true,
     webSecurity:false
   } })
-
+  
   if (process.env.WEBPACK_DEV_SERVER_URL) {
     // Load the url of the dev server if in development mode
     win.loadURL(process.env.WEBPACK_DEV_SERVER_URL)
     if (!process.env.IS_TEST) win.webContents.openDevTools()
   } else {
+    win.setMenuBarVisibility(false)
     createProtocol('app')
     // Load the index.html when not in development
     win.loadURL('app://./index.html')

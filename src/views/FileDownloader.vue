@@ -22,8 +22,8 @@
           </v-toolbar>
           <v-card-text>
             <v-form>
-            <setup />
-            <server :enable="serverStart" v-show="serverStart"/>
+            <setup :enable="!start" />
+            <server :enable="start" v-show="start"/>
             </v-form>
           </v-card-text>
           <v-card-actions>
@@ -46,7 +46,7 @@ export default {
   components:{Setup, Server},
   data () {
     return {
-      serverStart:false,
+      start:false,
     }
   },
   computed:{
