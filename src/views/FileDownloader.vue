@@ -28,8 +28,8 @@
           </v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn color="primary" @click="serverStart = !serverStart" :disabled="isSettingNotValid">
-              {{serverStart?"STOP":"START"}}
+            <v-btn color="primary" @click="start = !start" :disabled="isSettingNotValid">
+              {{start?"STOP":"START"}}
             </v-btn>
           </v-card-actions>
         </v-card>

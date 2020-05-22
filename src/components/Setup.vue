@@ -5,10 +5,12 @@
       @change="setFiles"
       multiple
       show-size
+      :disabled="!enable"
       prepend-icon="attach_file"
       clearable clear-icon="clear"
       label="File input" />
     <v-select
+    :disabled="!enable"
      :value="ip"
      :items="iplist"
      @input="setIPAddress"/>
@@ -18,6 +20,7 @@
 <script>
 const os = require('os')
 export default {
+  props:['enable'],
   data: () => ({
     
   }),
