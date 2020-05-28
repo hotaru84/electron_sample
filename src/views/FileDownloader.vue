@@ -18,12 +18,20 @@
             dark
             flat
           >
-            <v-toolbar-title>Setup</v-toolbar-title>
+            <v-text-field
+              v-model="search"
+              flat
+              hide-details
+              prepend-icon="mdi-briefcase-search"
+              single-line
+              solo-inverted
+            ></v-text-field>
           </v-toolbar>
           <v-card-text>
-            <v-form>
-            <setup :enable="!start" />
-            <server :enable="start" v-show="start"/>
+            <v-form> 
+            <file-browser :search="search"/>
+            <!-- <setup :enable="!start" />
+            <server :enable="start" v-show="start"/> -->
             </v-form>
           </v-card-text>
           <v-card-actions>
@@ -40,12 +48,14 @@
 
 <script>
 import { isNullOrUndefined } from 'util'
-import Setup from '../components/Setup'
-import Server from '../components/Server'
+//import Setup from '../components/Setup'
+//import Server from '../components/Server'
+import FileBrowser from '../components/FileBrowser'
 export default {
-  components:{Setup, Server},
+  components:{FileBrowser},
   data () {
     return {
+      search:"",
       start:false,
     }
   },
