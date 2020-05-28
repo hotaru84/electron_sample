@@ -22,18 +22,16 @@
               v-model="search"
               flat
               hide-details
-              prepend-icon="mdi-briefcase-search"
+              prepend-inner-icon="mdi-briefcase-search"
               single-line
               solo-inverted
             ></v-text-field>
           </v-toolbar>
-          <v-card-text>
-            <v-form> 
+            <v-sheet height="300px" class="overflow-y-auto">
             <file-browser :search="search"/>
             <!-- <setup :enable="!start" />
             <server :enable="start" v-show="start"/> -->
-            </v-form>
-          </v-card-text>
+            </v-sheet>
           <v-card-actions>
             <v-spacer></v-spacer>
             <v-btn color="primary" @click="start = !start" :disabled="isSettingNotValid">
