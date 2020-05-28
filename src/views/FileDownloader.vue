@@ -9,29 +9,13 @@
     >
       <v-col
         cols="12"
-        sm="8"
+        sm="6"
         md="4"
       >
         <v-card class="elevation-12">
-          <v-toolbar
-            color="primary"
-            dark
-            flat
-          >
-            <v-text-field
-              v-model="search"
-              flat
-              hide-details
-              prepend-inner-icon="mdi-briefcase-search"
-              single-line
-              solo-inverted
-            ></v-text-field>
-          </v-toolbar>
-            <v-sheet height="300px" class="overflow-y-auto">
-            <file-browser :search="search"/>
+            <file-browser />
             <!-- <setup :enable="!start" />
             <server :enable="start" v-show="start"/> -->
-            </v-sheet>
           <v-card-actions>
             <v-spacer></v-spacer>
             <v-btn color="primary" @click="start = !start" :disabled="isSettingNotValid">
