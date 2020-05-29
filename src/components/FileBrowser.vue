@@ -44,6 +44,7 @@ const path = require('path')
 export default {
   props:['basePath'],
   data: () => ({
+    search:'',
     files: {
       html: 'mdi-language-html5',
       js: 'mdi-nodejs',

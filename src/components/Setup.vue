@@ -6,14 +6,14 @@
       multiple
       show-size
       :disabled="!enable"
-      prepend-icon="attach_file"
-      clearable clear-icon="clear"
-      label="File input" />
+      prepend-icon="mdi-upload"
+      clearable />
     <v-select
-    :disabled="!enable"
-     :value="ip"
-     :items="iplist"
-     @input="setIPAddress"/>
+      prepend-icon="mdi-access-point-network"
+      :disabled="!enable"
+      :value="ip"
+      :items="iplist"
+      @input="setIPAddress"/>
   </v-form>
 </template>
 

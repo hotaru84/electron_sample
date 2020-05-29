@@ -1,3 +1,4 @@
+import '@mdi/font/css/materialdesignicons.css' // Ensure you are using css-loader
 import Vue from 'vue';
 import Vuetify from 'vuetify/lib';
 
@@ -13,19 +14,7 @@ export default new Vuetify({
     current: 'ja'
   },
   icons: {
-    iconfont: 'mdi',
-    values: {
-      sort:'expand_more',
-      complete:'done',
-      next:'navigate_next',
-      prev:'navigate_before',
-      checkboxOff:'check_box_outline_blank',
-      checkboxOn:'check_box',
-      dropdown:'arrow_drop_down',
-      search:'search',
-      menu:'menu',
-      expand:'expand_less'
-    }
+    iconfont: 'mdi'
   },
   theme: {
     themes: {

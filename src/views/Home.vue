@@ -12,25 +12,17 @@
         sm="6"
         md="4"
       >
-        <v-card class="elevation-12 pa-2">
-          <setup :enable="!start" />
+        <v-card class="elevation-12">
+          <file-browser />
+          <file-browser />
+            <!-- <setup :enable="!start" />
+            <server :enable="start" v-show="start"/> -->
           <v-card-actions>
-            <v-btn outlined color="primary" @click="start = !start" :disabled="isSettingNotValid">
-              <div v-if="start">
-                <v-icon>mdi-pencil</v-icon> Edit
-              </div>
-              <div v-else>
-                <v-icon>mdi-qrcode</v-icon> DOWNLOAD LINK
-              </div>
+            <v-spacer></v-spacer>
+            <v-btn color="primary" @click="start = !start" :disabled="isSettingNotValid">
+              {{start?"STOP":"START"}}
             </v-btn>
           </v-card-actions>
-          <v-expand-transition>
-            <div v-show="start">
-              <v-card-text>
-                <server :enable="start" v-show="start"/>
-              </v-card-text>
-            </div>
-          </v-expand-transition>
         </v-card>
       </v-col>
     </v-row>
@@ -39,11 +31,11 @@
 
 <script>
 import { isNullOrUndefined } from 'util'
-import Setup from '../components/Setup'
-import Server from '../components/Server'
-
+//import Setup from '../components/Setup'
+//import Server from '../components/Server'
+import FileBrowser from '../components/FileBrowser'
 export default {
-  components:{Setup,Server},
+  components:{FileBrowser},
   data () {
     return {
       search:"",
