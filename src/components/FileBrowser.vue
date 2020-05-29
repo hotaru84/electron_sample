@@ -1,40 +1,22 @@
 <template>
-  <v-sheet>
-    <v-toolbar
-      color="primary"
-      dark
-      flat
-    >
-      <v-text-field
-        v-model="search"
-        flat
-        hide-details
-        prepend-icon="mdi-briefcase-search"
-        single-line
-        solo-inverted
-      ></v-text-field>
-    </v-toolbar>
-    <v-sheet height="300px" class="overflow-y-auto">
-    <v-treeview
-      :items="items"
-      :search="search"
-      item-disabled="locked"
-      activatable
-      item-key="name"
-      :load-children="fetch"
-      open-on-click
-    >
-      <template v-slot:prepend="{ item, open }">
-        <v-icon v-if="item.children">
-          {{ open ? 'mdi-folder-open' : 'mdi-folder' }}
-        </v-icon>
-        <v-icon v-else>
-          {{ files[item.file] }}
-        </v-icon>
-      </template>
-    </v-treeview>
-    </v-sheet>
-  </v-sheet>
+  <v-treeview
+    :items="items"
+    :search="search"
+    item-disabled="locked"
+    activatable
+    item-key="name"
+    :load-children="fetch"
+    open-on-click
+  >
+    <template v-slot:prepend="{ item, open }">
+      <v-icon v-if="item.children">
+        {{ open ? 'mdi-folder-open' : 'mdi-folder' }} 
+      </v-icon>
+      <v-icon v-else>
+        {{ files[item.file] }}
+      </v-icon>
+    </template>
+  </v-treeview>
 </template>
 
 <script>
@@ -42,9 +24,8 @@ import { isNullOrUndefined } from 'util'
 const fs = require('fs').promises
 const path = require('path')
 export default {
-  props:['basePath'],
+  props:['basePath','search'],
   data: () => ({
-    search:'',
     files: {
       html: 'mdi-language-html5',
       js: 'mdi-nodejs',

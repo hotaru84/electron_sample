@@ -1,5 +1,5 @@
 <template>
-  <v-carousel hide-delimiters>
+  <v-carousel v-model="id" hide-delimiters :show-arrows="false">
     <v-carousel-item
       v-for="(item,i) in items"
       :key="i"
@@ -10,6 +10,7 @@
 
 <script>
   export default {
+    props:['id'],
     data () {
       return {
         items: [
