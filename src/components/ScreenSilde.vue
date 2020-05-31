@@ -2,9 +2,10 @@
   <v-carousel v-model="id" hide-delimiters :show-arrows="false">
     <v-carousel-item
       v-for="(item,i) in items"
-      :key="i"
-      :src="item.src"
-    ></v-carousel-item>
+      :key="i"      
+    >
+    <v-img :src="item.src" aspect-ratio="1.5" />
+    </v-carousel-item>
   </v-carousel>
 </template>
 

@@ -1,5 +1,5 @@
 <template>
-  <v-container style="max-width: 600px;">
+  <v-container>
     <v-timeline dense clipped>
       <v-timeline-item
         fill-dot
