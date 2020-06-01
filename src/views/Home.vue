@@ -1,6 +1,6 @@
 <template>
   <v-card class="fill-height" tile>
-    <v-tabs vertical color="primary">
+    <v-tabs right color="primary">
       <v-tab>
         <v-icon left>mdi-monitor-cellphone</v-icon> Control
       </v-tab>
@@ -9,27 +9,38 @@
       </v-tab>
       <v-tab-item>
         <v-row>
-          <v-col cols=6>
+          <v-col cols=12 sm=6>
+            <v-sheet class="fill-height ms-2 pa-2" color="grey" style="position:relative">
+              <v-img src='device-2020-05-31-102305.png' max-height="78vh" height="100%" contain />
+              <v-btn small color="red" fab top right absolute class="mb-2 me-2"><v-icon>mdi-power</v-icon></v-btn>
+            </v-sheet>
+          </v-col>
+          <v-col cols=12 sm=6>
+            <v-card outlined class="mx-2">
+              <v-card-subtitle color="primary">
+              <v-icon left >mdi-cellphone</v-icon>DEVICE
+            </v-card-subtitle>
+            <v-sheet style="max-height:48vh" class="overflow-y-auto">
+              <file-browser :search="search" /> 
+            </v-sheet>
+            </v-card>
             <v-card-actions>
               <v-spacer/>
-              <v-btn text color="primary"><v-icon left>mdi-cellphone-play</v-icon>Start</v-btn>
-              <v-btn text color="primary"><v-icon left>mdi-cellphone-cog</v-icon>Setting</v-btn>
-              <v-btn text color="primary"><v-icon left>mdi-power-standby</v-icon>Power</v-btn>
-              <v-spacer/> 
+              <v-btn depressed color="primary"><v-icon small left>mdi-download</v-icon>Download</v-btn>
+              <v-spacer/>
+              <v-btn depressed color="primary"><v-icon small left>mdi-upload</v-icon>Upload</v-btn>
+              <v-spacer/>
             </v-card-actions>
-            <v-container style="height:80vh" class="fill-height">
-              <v-img src='device-2020-05-31-102305.png' max-height="75vh"  height="100%" contain/>
-            </v-container>
-          </v-col>
-          <v-col cols=6>
-            <v-card-actions>
-              <v-btn text color="primary"><v-icon left>mdi-download</v-icon>Download</v-btn>
-              <v-btn text color="primary"><v-icon left>mdi-upload</v-icon>Upload</v-btn>
-              <v-btn text color="primary"><v-icon left>mdi-folder-search</v-icon>Search</v-btn>
-            </v-card-actions>
-            <v-container style="height:70vh" class="overflow-y-auto">
-              <file-browser :search="search" /> 
-            </v-container>
+            <v-card outlined class="mx-2 px-2">
+            <v-card-subtitle color="primary">
+              <v-icon left >mdi-monitor</v-icon>PC
+            </v-card-subtitle>
+            <v-file-input
+              multiple
+              show-size
+              label="Target PC Folder"
+              clearable />
+            </v-card>
           </v-col>
         </v-row>
       </v-tab-item>
@@ -122,3 +133,10 @@ export default {
   },
 }
 </script>
+<style scoped>
+.v-btn--fab {
+  bottom: 0;
+  position: absolute;
+  margin: 0 0 16px 16px;
+}
+</style>
