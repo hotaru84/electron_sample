@@ -10,9 +10,19 @@
       <v-tab-item>
         <v-row>
           <v-col cols=12 sm=6>
-            <v-sheet class="fill-height ms-2 pa-2" color="grey" style="position:relative">
-              <v-img src='device-2020-05-31-102305.png' max-height="78vh" height="100%" contain />
-              <v-btn small color="red" fab top right absolute class="mb-2 me-2"><v-icon>mdi-power</v-icon></v-btn>
+            <v-sheet class="fill-height ms-2 pa-2" color="white" style="position:relative">
+              <v-img lazy-src='device-2020-05-31-102305.png' max-height="78vh" height="100%"
+                  gradient="to top right, rgba(69,69,69,.3), rgba(69,69,69,.3)" contain>
+                  <template v-slot:placeholder>
+                    <v-row
+                      class="fill-height ma-0"
+                      align="center"
+                      justify="center"
+                    >
+                      <v-btn icon x-large color="white"><v-icon x-large>mdi-play-circle</v-icon></v-btn> 
+                    </v-row>
+                  </template>
+              </v-img>
             </v-sheet>
           </v-col>
           <v-col cols=12 sm=6>
@@ -45,74 +55,30 @@
         </v-row>
       </v-tab-item>
       <v-tab-item>
-        <v-toolbar flat>
-          <v-spacer />
-          <v-dialog
-            ref="dialog"
-            v-model="modal"
-            :return-value.sync="date"
-            persistent
-            width="290px"
-          >
-            <template v-slot:activator="{ on }">
-              <v-text-field
-                v-model="date"
-                prepend-inner-icon="mdi-calendar"
-                readonly
-                v-on="on"
-              ></v-text-field>
-            </template>
-            <v-date-picker v-model="date" scrollable>
-              <v-spacer></v-spacer>
-              <v-btn text color="primary" @click="modal = false">Cancel</v-btn>
-              <v-btn text color="primary" @click="$refs.dialog.save(date)">OK</v-btn>
-            </v-date-picker>
-          </v-dialog>
-          <v-btn icon><v-icon>mdi-filter-variant</v-icon></v-btn>
-        </v-toolbar>
-        <v-row class="mx-2">
+        <v-row>
           <v-col md=4 sm=6>
-            <v-img src='device-2020-05-31-102305.png' max-height="85vh"  height="100%" contain/>
+            <v-img src='device-2020-05-31-102305.png' max-height="75vh" height="100%" contain/>
           </v-col>
-          <v-col md=8 sm=6>
-            <v-sheet height="85vh" class="overflow-y-auto">
+          <v-col md=8 sm=6 class="position:relative">
+            <v-sheet height="75vh" class="overflow-y-auto">
               <log-timeline />
             </v-sheet>
-          </v-col>
-        </v-row>
-      </v-tab-item>
-      <v-tab-item>
-        <v-row>
-          <v-text-field
-            v-model="search"
-            flat
-            hide-details
-            prepend-icon="mdi-briefcase-search"
-            single-line
-          ></v-text-field>
-        </v-row>
-        <v-row class="mx-4">
-          <v-col cols=5>
-            <v-card shaped class="pa-2">
-              <v-card-title>From</v-card-title>
-              <v-container style="height:70vh" class="overflow-y-auto">
-                <file-browser :search="search" />
-              </v-container>
-            </v-card>
-          </v-col>
-          <v-col cols=2>
-            <v-container style="height:70vh" class="fill-height">
-              <v-btn block tile>DOWNLOAD<v-icon right>mdi-arrow-collapse-right</v-icon></v-btn>
-              <v-btn block tile><v-icon left>mdi-arrow-collapse-left</v-icon>UPLOAD</v-btn>
-            </v-container>
-          </v-col>
-          <v-col cols=5>
-            <v-card shaped class="pa-2">
-              <v-card-title>From</v-card-title>
-              <v-container style="height:70vh" class="overflow-y-auto">
-                <file-browser :search="search" />
-              </v-container>
-            </v-card>
+            <v-bottom-sheet v-model="sheet" inset>
+              <template v-slot:activator="{ on }">
+                <v-btn absolute fab right bottom color="secondary"
+                v-on="on"
+                 class="mb-4 mr-4"><v-icon>mdi-filter-variant</v-icon></v-btn>
+              </template>
+              <v-sheet class="text-center" height="200px">
+                <v-btn
+                  class="mt-6"
+                  text
+                  color="error"
+                  @click="sheet = !sheet"
+                >close</v-btn>
+                <div class="my-3">This is a bottom sheet using the inset prop</div>
+              </v-sheet>
+            </v-bottom-sheet>
           </v-col>
         </v-row>
       </v-tab-item>
