@@ -56,12 +56,9 @@
       </v-tab-item>
       <v-tab-item>
         <v-row>
-          <v-col md=4 sm=6>
-            <v-img src='device-2020-05-31-102305.png' max-height="75vh" height="100%" contain/>
-          </v-col>
-          <v-col md=8 sm=6 class="position:relative">
-            <v-sheet height="75vh" class="overflow-y-auto">
-              <log-timeline />
+          <v-col md=12 sm=12 class="position:relative">
+            <v-sheet height="85vh" class="overflow-y-auto">
+              <profile />
             </v-sheet>
             <v-bottom-sheet v-model="sheet" inset>
               <template v-slot:activator="{ on }">
@@ -88,9 +85,9 @@
 
 <script>
 import FileBrowser from '../components/FileBrowser'
-import LogTimeline from '../components/LogTimeline'
+import Profile from '../components/Profile'
 export default {
-  components:{FileBrowser,LogTimeline},
+  components:{FileBrowser,Profile},
   data () {
     return {
       id:0,
