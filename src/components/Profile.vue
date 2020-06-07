@@ -27,9 +27,7 @@ export default {
       ],
       option: {
         tooltip: {
-            formatter: function (params) {
-                return params.marker + params.name + ': ' + params.value[3] + ' ms';
-            }
+            formatter: this.tooltipLabelFormatter
         },
         dataZoom: [{
             type: 'slider',
@@ -46,7 +44,7 @@ export default {
                 shadowOffsetY: 2,
                 shadowColor: '#aaa'
             },
-            labelFormatter: ''
+            labelFormatter: this.xAxisLabelFormatter
         }, {
             type: 'inside',
             filterMode: 'weakFilter'
@@ -61,9 +59,7 @@ export default {
             min: 0,
             scale: true,
             axisLabel: {
-                formatter: function (val) {
-                    return Math.max(0, val - 0) + ' ms';
-                }
+                formatter: this.xAxisLabelFormatter
             }
         },
         yAxis: {
@@ -85,6 +81,12 @@ export default {
     }
   },
   methods:{
+    xAxisLabelFormatter(val) {
+      return Math.max(0, val - this.startTime).toFixed(0) + ' ms';
+    },
+    tooltipLabelFormatter (params) {
+      return params.marker + params.name + ': ' + params.value[3] + ' ms';
+    },
     renderItem(params, api) {
       var categoryIndex = api.value(0);
       var start = api.coord([api.value(1), categoryIndex]);
